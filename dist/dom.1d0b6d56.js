@@ -220,6 +220,61 @@ window.dom = {
     has: function has(node, className) {
       return node.classList.contains(className);
     }
+  },
+  on: function on(node, eventName, fn) {
+    node.addEventListener(eventName, fn);
+  },
+  off: function off(node, eventName, fn) {
+    node.removeEventListener(eventName, fn);
+  },
+  find: function find(selector, scope) {
+    return (scope || document).querySelectorAll(selector);
+  },
+  parent: function parent(node) {
+    return node.parentNode;
+  },
+  children: function children(node) {
+    return node.children;
+  },
+  siblings: function siblings(node) {
+    return Array.from(node.parentNode.children).filter(function (n) {
+      return n !== node;
+    });
+  },
+  next: function next(node) {
+    var x = node.nextSibling;
+
+    while (x && x.nodeType === 3) {
+      x = x.nextSibling;
+    }
+
+    return x;
+  },
+  previous: function previous(node) {
+    var x = node.previousSibling;
+
+    while (x && x.nodeType === 3) {
+      x = x.previousSibling;
+    }
+
+    return x;
+  },
+  each: function each(nodeList, fn) {
+    for (var i = 0; i < nodeList.length; i++) {
+      fn.call(null, nodeList[i]);
+    }
+  },
+  index: function index(node) {
+    var list = dom.children(node.parentNode);
+    var i;
+
+    for (i = 0; i < list.length; i++) {
+      if (list[i] === node) {
+        break;
+      }
+    }
+
+    return i;
   }
 };
 },{}],"../../../../AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -250,7 +305,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57305" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65178" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
